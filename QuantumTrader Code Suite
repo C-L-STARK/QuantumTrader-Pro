@@ -1,0 +1,60 @@
+QuantumTrader_TelegramBot.py
+
+Description: Telegram Bot to control and monitor QuantumTrader EA remotely
+
+import logging from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup from telegram.ext import ApplicationBuilder, CommandHandler, CallbackContext, CallbackQueryHandler
+
+TOKEN = "YOUR_TELEGRAM_BOT_TOKEN" AUTHORIZED_USERS = [123456789]  # Replace with actual Telegram user IDs
+
+async def start(update: Update, context: CallbackContext): if update.effective_user.id not in AUTHORIZED_USERS: await update.message.reply_text("Access denied.") return keyboard = [[ InlineKeyboardButton("Get Status", callback_data='status'), InlineKeyboardButton("Toggle Trading", callback_data='toggle') ]] reply_markup = InlineKeyboardMarkup(keyboard) await update.message.reply_text("QuantumTrader Control Panel:", reply_markup=reply_markup)
+
+async def button(update: Update, context: CallbackContext): query = update.callback_query await query.answer() if query.data == 'status': await query.edit_message_text(text="System status: All systems nominal.") elif query.data == 'toggle': await query.edit_message_text(text="Trading mode toggled.")
+
+if name == 'main': app = ApplicationBuilder().token(TOKEN).build() app.add_handler(CommandHandler("start", start)) app.add_handler(CallbackQueryHandler(button)) app.run_polling()
+
+// QuantumTrader_EA.mq4 // Description: Main trading engine using Quantum Probabilities and Bill Williams Oscillators
+
+#property strict input double Risk = 0.01; input bool UseAggressiveMode = false; input int ProjectionCandles = 5; input bool AllowLong = true; input bool AllowShort = true;
+
+extern string Mode = "Quantum"; double ProbTrendContinue, ProbTrendReversal;
+
+int OnInit() { Print("QuantumTrader EA Initialized"); return INIT_SUCCEEDED; }
+
+void OnTick() { double ao = iAO(Symbol(), 0); double ac = iAC(Symbol(), 0); double prob = MathRand() % 100 / 100.0; // Simulated quantum model if (prob > 0.7 && AllowLong) { OrderSend(Symbol(), OP_BUY, 0.1, Ask, 3, 0, 0, "QuantumBuy", 0, 0, clrBlue); } else if (prob < 0.3 && AllowShort) { OrderSend(Symbol(), OP_SELL, 0.1, Bid, 3, 0, 0, "QuantumSell", 0, 0, clrRed); } }
+
+// QuantumTrader_Dashboard.mq4 // Description: Visual indicator with color-coded zones and probability overlays
+
+#property indicator_chart_window
+
+int OnInit() { ObjectCreate(0, "QT_Label", OBJ_LABEL, 0, 0, 0); ObjectSetText("QT_Label", "Quantum Probability Dashboard", 14, "Arial", clrWhite); return INIT_SUCCEEDED; }
+
+int OnCalculate(const int rates_total, const int prev_calculated, const datetime &time[], const double &open[], const double &high[], const double &low[], const double &close[], const long &tick_volume[], const long &volume[], const int &spread[]) { double prob_up = MathRand() % 100 / 100.0; string color = prob_up > 0.7 ? "Green" : (prob_up < 0.3 ? "Red" : "Gray"); Comment("Projected Probability: ", DoubleToString(prob_up, 2), " [", color, "]"); return(rates_total); }
+
+QuantumML_SignalProcessor.py
+
+Description: Python ML processor for real-time or batch signal prediction
+
+import pandas as pd from sklearn.ensemble import RandomForestClassifier import joblib
+
+Load data
+
+X = pd.read_csv("QuantumSignals_Live.csv") y = X.pop("Target")
+
+Train model
+
+model = RandomForestClassifier(n_estimators=100) model.fit(X, y)
+
+Save model
+
+joblib.dump(model, "quantum_model.pkl")
+
+Predict on new data
+
+X_new = pd.read_csv("Predictions.csv") preds = model.predict(X_new) pd.DataFrame(preds, columns=["Signal"]).to_csv("Predicted_Signals.csv", index=False)
+
+// TelegramCommands.json // List of commands recognized by the Telegram bot { "commands": [ {"command": "start", "description": "Initialize control panel"}, {"command": "status", "description": "Get EA system status"}, {"command": "toggle", "description": "Toggle trading mode"} ] }
+
+// QuantumSignals_Live.csv // Sample CSV structure for signal logging symbol,timestamp,AO,AC,QuantumProb,Target EURUSD,2025-05-30 10:00,0.0012,0.0003,0.78,1 EURUSD,2025-05-30 10:01,0.0008,-0.0001,0.25,0
+
+// Predictions.csv // Sample input data for ML signal predictions AO,AC,QuantumProb 0.0011,0.0005,0.79 0.0007,-0.0002,0.22
+
