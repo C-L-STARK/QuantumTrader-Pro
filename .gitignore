@@ -8,13 +8,11 @@ __pycache__/
 
 # Distribution / packaging
 .Python
-build/
 develop-eggs/
 dist/
 downloads/
 eggs/
 .eggs/
-lib/
 lib64/
 parts/
 sdist/
@@ -172,3 +170,64 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+/lib/generated_plugin_registrant.dart
+build/
+
+# Android related
+**/android/**/gradle-wrapper.jar
+**/android/.gradle
+**/android/captures/
+**/android/gradlew
+**/android/gradlew.bat
+**/android/local.properties
+**/android/**/GeneratedPluginRegistrant.java
+**/android/key.properties
+*.jks
+*.keystore
+
+# Miscellaneous
+*.class
+*.swp
+.DS_Store
+.atom/
+.buildlog/
+.history
+.svn/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# API Keys and Secrets
+secrets.json
+telegram_token.txt
+mt4_credentials.json
+
+# Machine Learning Models (large files)
+*.tflite
+*.h5
+*.pb
+!ml/sample_model.tflite
+
+# Build outputs
+*.apk
+*.aab
+*.ipa
+!build/QuantumTraderPro.apk
+
+# Temporary files
+*.tmp
+*.bak
+*~

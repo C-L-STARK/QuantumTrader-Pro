@@ -1,0 +1,9 @@
+timestamp,symbol,trend,probability,action,entry_prob,exit_prob,confidence,predicted_window
+2025-11-07T21:00:00Z,EURUSD,bullish,0.78,entry,0.82,0.18,0.85,5
+2025-11-07T20:55:00Z,GBPUSD,bearish,0.65,entry,0.70,0.30,0.72,6
+2025-11-07T20:50:00Z,USDJPY,neutral,0.55,exit,0.40,0.60,0.58,3
+2025-11-07T20:45:00Z,AUDUSD,bullish,0.72,entry,0.75,0.25,0.80,7
+2025-11-07T20:40:00Z,USDCHF,bearish,0.68,entry,0.71,0.29,0.76,4
+2025-11-07T20:35:00Z,NZDUSD,bullish,0.61,entry,0.65,0.35,0.68,5
+2025-11-07T20:30:00Z,EURGBP,neutral,0.52,exit,0.45,0.55,0.60,3
+2025-11-07T20:25:00Z,EURJPY,bullish,0.75,entry,0.79,0.21,0.82,6
