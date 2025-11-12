@@ -157,6 +157,33 @@ class MT4Service {
     }
   }
 
+  Future<bool> connect({
+    required int login,
+    required String password,
+    required String server,
+  }) async {
+    try {
+      final response = await http.post(
+        Uri.parse('$_apiEndpoint/api/connect'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({
+          'login': login,
+          'password': password,
+          'server': server,
+        }),
+      ).timeout(const Duration(seconds: 10));
+
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        _logger.i('Connected to MT4: $server, Login: $login');
+        return data['success'] == true;
+      }
+    } catch (e) {
+      _logger.e('MT4 connection failed: $e');
+    }
+    return false;
+  }
+
   void dispose() {
     stopPolling();
   }

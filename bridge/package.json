@@ -1,0 +1,34 @@
+{
+  "name": "quantumtrader-bridge",
+  "version": "2.0.0",
+  "description": "WebSocket Bridge Server for QuantumTrader Pro - Connects mobile app to MT4/MT5",
+  "main": "websocket_bridge.js",
+  "scripts": {
+    "start": "node websocket_bridge.js",
+    "dev": "nodemon websocket_bridge.js",
+    "test": "echo \"No tests specified\" && exit 0"
+  },
+  "keywords": [
+    "mt4",
+    "mt5",
+    "metatrader",
+    "forex",
+    "trading",
+    "websocket",
+    "bridge"
+  ],
+  "author": "QuantumTrader Pro",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "ws": "^8.14.2",
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  }
+}
