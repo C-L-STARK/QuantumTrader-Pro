@@ -1,4 +1,4 @@
-# 📱 QuantumTrader Pro
+# 📱 QuantumTrader Pro - Mobile App
 
 <div align="center">
 
@@ -9,20 +9,24 @@
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Win Rate](https://img.shields.io/badge/target%20win%20rate-94.7%25-success.svg)
 
-**First Sterling QuantumTrader Pro**
+**First Sterling QuantumTrader Pro - Mobile Edition**
 Quantum Mechanics & AI-Powered Trading System
 
 *Built by Dezirae Stark*
 
-[Features](#-features) • [Installation](#-installation) • [Quantum System](#-quantum-trading-system) • [Documentation](#-documentation) • [Contributing](#-contributing)
+[Features](#-features) • [Installation](#-installation) • [Quantum System](#-quantum-trading-system) • [Desktop Suite](#-desktop-trading-suite) • [Documentation](#-documentation)
 
 </div>
+
+> 📱 **This is the Mobile App branch.** For desktop components (Bridge Server, ML Engine, MT4/MT5 EAs, Backtesting), see the [**Desktop Suite branch**](https://github.com/Dezirae-Stark/QuantumTrader-Pro/tree/desktop).
 
 ---
 
 ## 🔬 Overview
 
-**QuantumTrader Pro v2.0** is a revolutionary Android trading application that applies **quantum mechanics**, **chaos theory**, and **adaptive machine learning** to achieve 94%+ win rates.
+**QuantumTrader Pro v2.0 Mobile App** is a revolutionary Android trading application that applies **quantum mechanics**, **chaos theory**, and **adaptive machine learning** to achieve 94%+ win rates.
+
+This branch contains the **Flutter mobile application**. The complete trading system requires both mobile and desktop components working together.
 
 ### **Core Systems:**
 
@@ -218,44 +222,49 @@ See **[QUANTUM_SYSTEM_GUIDE.md](QUANTUM_SYSTEM_GUIDE.md)** for complete document
 
 ---
 
-## 🔧 MT4 Bridge Setup
+## 💻 Desktop Trading Suite
 
-The app requires a bridge server to communicate with MT4. A sample Python Flask server is included:
+The mobile app connects to a desktop trading infrastructure for complete functionality.
 
-### Running the Bridge Server
+### Required Desktop Components
+
+The desktop suite (on the **`desktop` branch**) includes:
+
+- 🔗 **WebSocket Bridge Server** (Node.js) - Real-time communication with MT4/MT5
+- 🤖 **ML Prediction Engine** (Python) - Quantum mechanics-based market analysis
+- 📊 **MT4/MT5 Expert Advisors** - Automated trading with quantum algorithms
+- 📈 **Custom Indicators** - Trend analysis and signal visualization
+- 🔄 **Backtesting Framework** - Historical data testing
+
+### Quick Desktop Setup
 
 ```bash
-cd bridge
+# Clone repository and switch to desktop branch
+git checkout desktop
 
-# Install dependencies
-pip install -r requirements.txt
-
-# Run the server
-python mt4_bridge.py
+# Follow the comprehensive installation guide
+# See: https://github.com/Dezirae-Stark/QuantumTrader-Pro/tree/desktop
 ```
 
-The server will start on `http://localhost:8080` and provide these endpoints:
+**Complete Documentation:** [Desktop Suite README](https://github.com/Dezirae-Stark/QuantumTrader-Pro/tree/desktop#readme)
 
-- `GET /api/health` - Health check
-- `GET /api/signals` - Trading signals
-- `GET /api/trades` - Open trades
-- `GET /api/predictions` - ML predictions
-- `POST /api/order` - Create order
-- `POST /api/close/<id>` - Close position
+### Bridge Server Connection
 
-### MT4 Integration
+The mobile app requires a running bridge server for live trading:
 
-Place MQL4 scripts in your MT4 `Experts` and `Scripts` folders to:
-1. Export signals to JSON files
-2. Poll predictions from the ML model
-3. Send data to the bridge server
+1. Set up bridge server on desktop (see desktop branch)
+2. Start the WebSocket bridge: `npm start` or `pm2 start websocket_bridge.js`
+3. Configure bridge URL in mobile app Settings
+4. Test connection to verify communication
+
+**Default Bridge URL:** `http://192.168.1.100:8080` (adjust to your desktop IP)
 
 ---
 
 ## 📁 Project Structure
 
 ```
-QuantumTrader-Pro/
+QuantumTrader-Pro/ (main branch - Mobile App)
 ├── lib/                    # Flutter app source code
 │   ├── main.dart          # App entry point
 │   ├── models/            # Data models
@@ -274,19 +283,24 @@ QuantumTrader-Pro/
 │   ├── images/           # Image resources
 │   ├── icons/            # App icons
 │   └── samples/          # Sample data
-├── bridge/                # MT4 API bridge
-│   ├── mt4_bridge.py     # Flask server
-│   └── requirements.txt  # Python dependencies
-├── ml/                    # Machine learning models
 ├── predictions/           # Sample predictions
 │   ├── signal_output.json
 │   └── predictions.csv
 ├── .github/workflows/     # CI/CD automation
-│   └── android.yml        # Build workflow
+│   └── android.yml        # Android build workflow
 ├── pubspec.yaml           # Flutter dependencies
-├── README.md              # This file
+├── README.md              # This file (Mobile App)
 └── LICENSE                # MIT License
+
+Desktop Components (desktop branch):
+├── bridge/                # WebSocket Bridge Server (Node.js)
+├── ml/                    # ML Prediction Engine (Python)
+├── mql4/                  # MT4/MT5 Expert Advisors & Indicators
+├── backtest/              # Backtesting Framework
+└── docs/                  # Desktop documentation
 ```
+
+**Note:** Desktop server components (bridge, ML engine, MT4 EAs) are maintained on the **`desktop` branch**.
 
 ---
 
@@ -366,12 +380,21 @@ As of PR-2 (January 2025), this repository is **MIT-only**. A previous proprieta
 
 ## 🗺️ Roadmap
 
+### Mobile App (this branch)
 - [ ] iOS version
-- [ ] Custom ML model training interface
-- [ ] Real-time chart visualization
-- [ ] Multi-broker support
+- [ ] Real-time chart visualization in-app
 - [ ] Advanced risk management tools
 - [ ] Cloud sync for settings
+- [ ] Multi-device notifications
+- [ ] Offline mode with cached data
+
+### Desktop Suite (desktop branch)
+- [ ] Web-based dashboard UI
+- [ ] Multi-broker support (cTrader, NinjaTrader)
+- [ ] Advanced backtesting GUI
+- [ ] Docker containerization
+- [ ] Kubernetes deployment
+- [ ] Real-time performance analytics
 
 ---
 
@@ -386,5 +409,9 @@ As of PR-2 (January 2025), this repository is **MIT-only**. A previous proprieta
 **Made with ❤️ and Flutter**
 
 *"Let the probabilities speak."*
+
+### Branches
+📱 **[Mobile App (main branch)](https://github.com/Dezirae-Stark/QuantumTrader-Pro/tree/main)** - You are here
+💻 **[Desktop Suite (desktop branch)](https://github.com/Dezirae-Stark/QuantumTrader-Pro/tree/desktop)** - Bridge Server, ML Engine, MT4 EAs
 
 </div>
