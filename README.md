@@ -24,7 +24,7 @@ Quantum Mechanics & AI-Powered Trading System
 
 ## 🔬 Overview
 
-**QuantumTrader Pro v2.0 Mobile App** is a revolutionary Android trading application that applies **quantum mechanics**, **chaos theory**, and **adaptive machine learning** to achieve 94%+ win rates.
+**QuantumTrader Pro v2.1.0 Mobile App** is a revolutionary Android trading application that applies **quantum mechanics**, **chaos theory**, and **adaptive machine learning** to achieve 94%+ win rates.
 
 This branch contains the **Flutter mobile application**. The complete trading system requires both mobile and desktop components working together.
 
