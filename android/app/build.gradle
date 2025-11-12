@@ -42,7 +42,7 @@ android {
 
     defaultConfig {
         applicationId "com.quantumtrader.pro"
-        minSdk 24
+        minSdk 26
         targetSdk 34
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
