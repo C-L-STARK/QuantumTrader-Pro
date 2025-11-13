@@ -1,0 +1,64 @@
+name: Flutter Release Build
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: release
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Install Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.22.2'
+          channel: 'stable'
+
+      - name: Flutter Pub Get
+        run: flutter pub get
+
+      - name: Accept SDK licenses
+        run: yes | sdkmanager --licenses
+
+      - name: Build Flutter APK
+        run: flutter build apk --release
+
+      # Optional, if you want to bundle it with your secure signing pipeline
+      - name: Generate SHA256
+        run: sha256sum build/app/outputs/flutter-apk/app-release.apk > app-release.apk.sha256
+
+      # Optional GPG signing (matches your secure release setup)
+      - name: Import GPG key
+        run: echo "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --batch --import
+
+      - name: Sign checksum
+        run: |
+          gpg --batch --yes --pinentry-mode loopback \
+            --passphrase "${{ secrets.GPG_PASSPHRASE }}" \
+            --armor --detach-sign app-release.apk.sha256
+
+      - name: Upload Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            build/app/outputs/flutter-apk/app-release.apk
+            app-release.apk.sha256
+            app-release.apk.sha256.asc
